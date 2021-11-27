@@ -45,22 +45,27 @@ struct Car * createCar(char *nombre, int id, int **map, int *places){
     return car;
 }
 
+void printMap(void *carro){
+    struct Car *car = (struct Car *)carro;
+    //(int[ncars][100]) car->map;
+
+    for (int i=0;i<ncars;i++){
+        for(int j=0;j<100;j++){
+            printf("%d, ",car->map[i][j]);
+        }
+        printf("\n");
+    }
+}
+
 void *carFunction(void *carro){
     struct Car *car = (struct Car *)carro;
-    //printf("Hola\n");
-    //printf("Nombre: %s, id: %d, speed: %d, max speed: %d map: %p, places: %p\n",car->nombre,car->id,car->speed,car->maxSpeed,car->map,car->places);
-    //Aqui va el codigo
-    int **map = car->map;
+    printf("Nombre: %s, id: %d, speed: %d, max speed: %d map: %p, places: %p\n",car->nombre,car->id,car->speed,car->maxSpeed,car->map,car->places);
     while(car->finish==0){
         int prePos = car->percentage;
-        //int prep = map + (car->id*100+prePos)*sizeof(int);
-        //map[car->id][(int)prePos]=-1;
-        //&prep=-1;
+        //car->map[car->id][(int)prePos]=-1;
         car->racetime+=0.1;
         car->percentage += car->speed/100.0;
-        //map[car->id][(int)car->percentage%100]=car->id;
-        //int pos = map + (car->id*100+((int)car->percentage%100))*sizeof(int);
-        //&pos = car->id;
+        //car->map[car->id][(int)car->percentage%100]=car->id;
         if(car->percentage >= 100){
             car->lap+=1;
             car->percentage=0;
@@ -68,12 +73,10 @@ void *carFunction(void *carro){
         if (car->lap>nlaps){
             car->finish=1;
         }
-        //printf("Car #%d: lap: %d, percentage: %f, speed: %d, racetime: %f\n",car->id,car->lap,car->percentage,car->speed,car->racetime);
+        printf("Car #%d: lap: %d, percentage: %f, speed: %d, racetime: %f\n",car->id,car->lap,car->percentage,car->speed,car->racetime);
     }
     car->places[pl]=car->id;
     pl++;
-    //------------------
-    //pthread_exit(NULL);
     return NULL;
 }
 
@@ -122,6 +125,7 @@ int main(int argc, char **argv){
         struct Car *car= createCar("cari",id,(int **)map,(int *)place);
         //incar++;
         carFunction((void *)car);
+        //printMap((void *)car);
     }
 
     for(int i=0;i<ncars;i++){
