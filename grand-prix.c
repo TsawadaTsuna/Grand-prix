@@ -5,6 +5,7 @@
 
 int nlaps;
 int ncars;
+int pl=0; //actual place first in array
 
 struct Car{
     char *nombre;
@@ -42,12 +43,25 @@ void *carFunction(void *carro){
     printf("Nombre: %s, id: %d, speed: %d, max speed: %d map: %p, places: %p\n",car->nombre,car->id,car->speed,car->maxSpeed,car->map,car->places);
     //Aqui va el codigo
     while(car->finish==0){
-
+        car->racetime+=0.1;
+        car->percentage += car->speed/100.0;
+        if(car->percentage >= 100){
+            car->lap+=1;
+            car->percentage=0;
+        }
+        if (car->lap>nlaps){
+            car->finish=1;
+        }
+        printf("Car #%d: lap: %d, percentage: %f, speed: %d, racetime: %f\n",car->id,car->lap,car->percentage,car->speed,car->racetime);
     }
+    car->places[pl]=car->id;
+    pl++;
     //------------------
-    pthread_exit(NULL);
+    //pthread_exit(NULL);
+    return NULL;
 }
 
+//./gp nlaps ncars
 int main(int argc, char **argv){
     srand(time(0));
     if(argc>2){
@@ -69,5 +83,14 @@ int main(int argc, char **argv){
           exit(-1);
        }
     }
+
+    for(int i=0;i<ncars;i++){
+        pthread_join(cars[i],NULL);
+    }
+
+    for(int i=0;i<ncars;i++){
+        printf("Place %d: car #%d\n",i,place[i]);
+    }
+
     pthread_exit(NULL);
 }
