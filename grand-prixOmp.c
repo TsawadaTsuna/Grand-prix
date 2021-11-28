@@ -6,6 +6,7 @@
 int nlaps;
 int ncars;
 int pl=0; //actual place first in array
+int **map;
 
 struct Car{
     char *nombre;
@@ -65,11 +66,11 @@ void *carFunction(void *carro, struct Car **carros){
     int cAcc =0;
     printf("Car #%d: lap: %d, percentage: %f, speed: %d, racetime: %f, position: %d\n",car->id,car->lap,car->percentage,car->speed,car->racetime,car->place);
     while(car->finish==0){
-        //int prePos = car->percentage;
-        //car->map[car->id][(int)prePos]=-1;
+        int prePos = car->percentage;
+        car->map[car->id][(int)prePos]=-1;
         car->racetime+=0.1;
         car->percentage += car->speed/100.0;
-        //car->map[car->id][(int)car->percentage%100]=car->id;
+        car->map[car->id][(int)car->percentage%100]=car->id;
         //carros[car->id]->percentage=(int)car->percentage;
         for(int i=0;i<ncars;i++){
             if(carros[i]->percentage - car->percentage>0 && carros[i]->percentage - car->percentage<2 && carros[i]->speed < car->speed){
@@ -145,8 +146,12 @@ int main(int argc, char **argv){
     }
 
     int place[ncars];
-    int map[ncars][100];
+    //int map[ncars][100];
     struct Car *carsArray[ncars];
+    map = calloc(ncars,sizeof(int *));
+    for(int i=0;i<ncars;i++){
+        map[i]=calloc(100,sizeof(int));
+    }
     for (int i=0;i<ncars;i++){
         for(int j=0;j<100;j++){
             if (j==0){
@@ -157,14 +162,14 @@ int main(int argc, char **argv){
         }
     }
     
-    /*
+    
     for (int i=0;i<ncars;i++){
         for(int j=0;j<100;j++){
             printf("%d, ",map[i][j]);
         }
         printf("\n");
     }
-    */
+    
     for(int id=0;id<ncars;id++){
         struct Car *car= createCar("cari",id,(int **)map,(int *)place);
         carsArray[id]=car;
