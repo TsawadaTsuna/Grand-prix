@@ -14,6 +14,7 @@ struct Car{
     int maxSpeed;
     int lap;
     int place;
+    int acceleration;
     double racetime;
     double percentage;
     int finish;
@@ -27,8 +28,9 @@ struct Car * createCar(char *nombre, int id, int **map, int *places){
     car->id = id;
     car->speed = rand() % (100 + 1 - 10) + 10;
     car->maxSpeed = rand() % (200 + 1 - 50) + 50;
+    car->acceleration = rand() % (5 + 1 - 1) + 1;
     car->lap = 1;
-    car->place = id;
+    car->place = id+1;
     car->racetime =0;
     car->percentage=0;
     car->finish=0;
@@ -60,6 +62,8 @@ void printMap(void *carro){
 void *carFunction(void *carro, struct Car **carros){
     struct Car *car = (struct Car *)carro;
     printf("Nombre: %s, id: %d, speed: %d, max speed: %d map: %p, places: %p\n",car->nombre,car->id,car->speed,car->maxSpeed,car->map,car->places);
+    int cAcc =0;
+    printf("Car #%d: lap: %d, percentage: %f, speed: %d, racetime: %f, position: %d\n",car->id,car->lap,car->percentage,car->speed,car->racetime,car->place);
     while(car->finish==0){
         //int prePos = car->percentage;
         //car->map[car->id][(int)prePos]=-1;
@@ -75,18 +79,49 @@ void *carFunction(void *carro, struct Car **carros){
                     //Codigo para igualar la velocidad del nuevo carro
                     int newSpeed = carros[i]->speed;
                     car->speed=newSpeed;
+                    printf("Car #%d: lap: %d, percentage: %f, speed: %d, racetime: %f, position: %d\n",car->id,car->lap,car->percentage,car->speed,car->racetime,car->place);
                 }
             }
         }
+
+        if (cAcc==10){
+            int newASpeed = car->speed + car->acceleration;
+            if(newASpeed>car->maxSpeed){
+                car->speed=car->maxSpeed;
+            }else{
+                car->speed=newASpeed;
+            }
+            printf("Car #%d: lap: %d, percentage: %f, speed: %d, racetime: %f, position: %d\n",car->id,car->lap,car->percentage,car->speed,car->racetime,car->place);
+            cAcc=0;
+        }else{
+            cAcc++;
+        }
+
         if(car->percentage >= 100){
             car->lap+=1;
             car->percentage=0;
         }
+        for(int i=0;i<ncars;i++){
+            if(carros[i]->place < car->place){
+                if(car->lap > carros[i]->lap){
+                    int tmp = car->place;
+                    car->place=carros[i]->place;
+                    carros[i]->place=tmp;
+                    printf("Car #%d: lap: %d, percentage: %f, speed: %d, racetime: %f, position: %d\n",car->id,car->lap,car->percentage,car->speed,car->racetime,car->place);
+                }else if(car->lap == carros[i]->lap && car->percentage > carros[i]->percentage){
+                    int tmp = car->place;
+                    car->place=carros[i]->place;
+                    carros[i]->place=tmp;
+                    printf("Car #%d: lap: %d, percentage: %f, speed: %d, racetime: %f, position: %d\n",car->id,car->lap,car->percentage,car->speed,car->racetime,car->place);
+                }
+            }
+        }
         if (car->lap>nlaps){
             car->finish=1;
         }
-        printf("Car #%d: lap: %d, percentage: %f, speed: %d, racetime: %f\n",car->id,car->lap,car->percentage,car->speed,car->racetime);
+        //printf("Car #%d: lap: %d, percentage: %f, speed: %d, racetime: %f, position: %d\n",car->id,car->lap,car->percentage,car->speed,car->racetime,car->place);
     }
+    printf("Car #%d: lap: %d, percentage: %f, speed: %d, racetime: %f, position: %d\n",car->id,car->lap,car->percentage,car->speed,car->racetime,car->place);
     car->places[pl]=car->id;
     pl++;
     return NULL;
