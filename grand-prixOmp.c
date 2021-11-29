@@ -55,7 +55,7 @@ struct Car * createCar(char *nombre, int id, int **map, int *places){
     car->maxSpeed = rand() % (200 + 1 - 150) + 150;
     car->acceleration = rand() % (8 + 1 - 3) + 3;
     car->lap = 1;
-    car->image = characters[rand() % (11 + 1 - 0) + 0];
+    car->image = characters[rand() % (10 + 1 - 0) + 0];
     car->place = id+1;
     car->racetime =0;
     car->percentage=0;
@@ -69,7 +69,7 @@ struct Car * createCar(char *nombre, int id, int **map, int *places){
 void printMap(struct Car **carros){
     system("clear");
     for(int i=0;i<ncars;i++){
-        char * carril = calloc(101,sizeof(char));
+        char * carril = calloc(100,sizeof(char));
         for(int j=0;j<100;j++){
             if(map[i][j]!=-1){
                 //itoa(car->id,carril[i],10);
@@ -79,13 +79,21 @@ void printMap(struct Car **carros){
                 carril[j]='-';
             }
         }
-        carril[100]='\n';
-        printf("%s%s",colors[i%5],carril);
+        //carril[100]='\n';
+        if (carros[i]->finish==0){
+            printf("%s%s Lap %d\n",colors[i%5],carril,carros[i]->lap);
+        }else{
+            printf("%s%s Finish\n",colors[i%5],carril);
+        }
     }
     printf("\n");
 
     for(int i=0;i<ncars;i++){
-        printf("\e[0mCar #%d: lap: %d, name: %s, speed: %d, racetime: %f, position: %d\n",carros[i]->id,carros[i]->lap,carros[i]->nombre,carros[i]->speed,carros[i]->racetime,carros[i]->place);
+        if (carros[i]->finish==0){
+            printf("\e[0mCar #%d: lap: %d, name: %s, speed: %d, racetime: %f, position: %d\n",carros[i]->id,carros[i]->lap,carros[i]->nombre,carros[i]->speed,carros[i]->racetime,carros[i]->place);
+        }else{
+            printf("\e[0mCar #%d: lap: Complete, name: %s, speed: %d, racetime: %f, position: %d\n",carros[i]->id,carros[i]->nombre,carros[i]->speed,carros[i]->racetime,carros[i]->place);
+        }
     }
     printf("\n");
 }
