@@ -8,7 +8,7 @@ int nlaps;
 int ncars;
 int pl=0; //actual place first in array
 int **map;
-char **carriles;
+//char **carriles;
 
 struct Car{
     char *nombre;
@@ -52,14 +52,33 @@ struct Car * createCar(char *nombre, int id, int **map, int *places){
 
 void printMap(){
     //system("clear");
+    /*
     for(int i=0;i<ncars;i++){
         printf("%s",carriles[i]);
     }
     printf("\n");
+    */
     //sleep(3);
 }
 
-
+void printMap2(){
+    system("clear");
+    for(int i=0;i<ncars;i++){
+        char * carril = calloc(101,sizeof(char));
+        for(int j=0;j<100;j++){
+            if(map[i][j]!=-1){
+                //itoa(car->id,carril[i],10);
+                //sprintf(carril[i],"%d",car->id);
+                carril[j]='X';
+            }else{
+                carril[j]='-';
+            }
+        }
+        carril[100]='\n';
+        printf("%s",carril);
+    }
+    printf("\n");
+}
 
 void *carFunction(void *carro, struct Car **carros){
     struct Car *car = (struct Car *)carro;
@@ -121,6 +140,7 @@ void *carFunction(void *carro, struct Car **carros){
             car->finish=1;
         }
 
+        /*
         char * carril = calloc(101,sizeof(char));
         for(int i=0;i<100;i++){
             if(i==(int) car->percentage){
@@ -133,6 +153,8 @@ void *carFunction(void *carro, struct Car **carros){
         }
         carril[100]='\n';
         carriles[car->id]=carril;
+
+        */
         //sleep(2);
         //printf("carril: %s",carriles[car->id]);
         //free(carril);
@@ -174,12 +196,13 @@ int main(int argc, char **argv){
     for(int i=0;i<ncars;i++){
         map[i]=calloc(100,sizeof(int));
     }
+    /*
     carriles=calloc(ncars,sizeof(char *));
 
     for (int i=0;i<ncars;i++){
         carriles[i]="X---------------------------------------------------------------------------------------------------\n";
     }
-
+    */
     for (int i=0;i<ncars;i++){
         for(int j=0;j<100;j++){
             if (j==0){
@@ -203,17 +226,38 @@ int main(int argc, char **argv){
         carsArray[id]=car;
     }
 
+    //omp_set_dynamic(0);
     #pragma omp parallel num_threads(ncars)
     {
         int id = omp_get_thread_num();
+        
         //srand(time(id));
         //struct Car *car= createCar("cari",id,(int **)map,(int *)place);
         //carsArray[id]=car;
         //incar++;
         carFunction((void *)carsArray[id],(struct Car**) carsArray);
+        
         //printMap();
         //printMap();
+        
+        /*
+        #pragma omp parallel num_threads(1)
+        {
+            while(pl<ncars){
+                printMap2();
+            }
+        }
+        */
+
+        /*
+        if(id==0){
+            while(pl<ncars){
+                printMap2();
+            }
+        }
+        */
     }
+    
 
     for(int i=0;i<3;i++){
         printf("Place %d: car #%d\n",i,place[i]);
