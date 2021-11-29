@@ -47,7 +47,7 @@ struct Car{
     int *places;
 };
 
-struct Car * createCar(char *nombre, int id, int **map, int *places){
+struct Car * createCar(char *nombre, int id,  int *places){
     struct Car *car = calloc(1,sizeof(struct Car));
     car->nombre = nombre;
     car->id = id;
@@ -60,7 +60,7 @@ struct Car * createCar(char *nombre, int id, int **map, int *places){
     car->racetime =0;
     car->percentage=0;
     car->finish=0;
-    car->map=map;
+    //car->map=map;
     car->places=places;
     return car;
 }
@@ -166,7 +166,7 @@ void *carFunction(void *carro, struct Car **carros){
     return NULL;
 }
 
-//./gp nlaps ncars
+// ./gp nlaps ncars
 int main(int argc, char **argv){
     srand(time(0));
     if(argc>2){
@@ -210,7 +210,7 @@ int main(int argc, char **argv){
     }
     
     for(int id=0;id<ncars+1;id++){
-        struct Car *car= createCar(names[id],id,(int **)map,(int *)place);
+        struct Car *car= createCar(names[id],id,(int *)place);
         carsArray[id]=car;
     }
 
