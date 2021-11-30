@@ -2,15 +2,15 @@
 
 ## Class Diagram (UML)
 
-![Class diagram](./UMLGrandPrix.png)
+![Class diagram](./images/UMLGrandPrix.png)
 
 ## Thread Chart Diagram
 
-![Thread chart](./ThreadChartCars.png)
+![Thread chart](./images/ThreadChartCars.png)
 
 ## Flow Chart Diagram
 
-![Flow chart](./FlowChartGrandPrix.png)
+![Flow chart](./images/FlowChartGrandPrix.png)
 
 ### Team
 

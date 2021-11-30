@@ -14,7 +14,7 @@ Michel Lujano - A01636172
 
 **A final project** for the class **Advance Programming** - **Period: Aug-Dec 2021**
 
-![Grand-Prix animation](./grandprix.gif)
+![Grand-Prix animation](./images/grandprix.gif)
 
 This project implementes the API OpenMP using C which is able to run multithreads available upon to the machine running the method **omp_get_max_threads()** for the maximum value for cars where our output is visible in a CLI.
 
