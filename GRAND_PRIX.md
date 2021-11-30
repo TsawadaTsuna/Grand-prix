@@ -67,7 +67,7 @@ make clean
 - `double` racetime - The time the car is running
 - `double` percentage - The percentage the car has traveled the current lap
 - `int` finish - The condition for the car to finish running
-- `*int` places - The the final places the cars has
+- `*int` places - The places the cars are
 
 ### Explanation
 
