@@ -1,4 +1,4 @@
-# Grand-Prix Multithreads - Using OpenMP with C
+# Multithreaded Grand Prix Simulator - Using OpenMP with C
 
 ## Members
 
