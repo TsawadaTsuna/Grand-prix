@@ -9,7 +9,7 @@
 ## Flow Chart Diagram 
 ![Class diagram](FlowChartGrandPrix.png)
 
-### Equipo:
+### Team:
 **Kevin Contreras - A01635597**
 
 **Luis Bodart - A01635000**
