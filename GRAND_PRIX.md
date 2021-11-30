@@ -5,7 +5,7 @@ This is an implementation of a multithreaded grand prix simulator where every ca
 ## Technical Features
 
 - The number of laps introduced by the user must be greater or equal than 1.
-- The number of cars introduced by the user must be greater or equal than 3 and less than the number of threads machine has minus 1.
+- The number of cars introduced by the user must be greater or equal than 3 and less than the number of threads the machine has minus 1.
 - Each car is a separate thread.
 - Each thread is created using the OpenMP API for parallel execution.
 - All cars use the same map data structure resource.
@@ -67,4 +67,8 @@ make clean
 - `double` racetime - The time the car is running
 - `double` percentage - The percentage the car has traveled the current lap
 - `int` finish - The condition for the car to finish running
-- `**int` places - The places all cars has
+- `*int` places - The the final places the cars has
+
+### Explication
+
+Video[link](yt)
