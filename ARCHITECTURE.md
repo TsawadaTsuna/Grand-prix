@@ -1,13 +1,13 @@
-# GrandPrix Multithreads - Document Architecture
+# Grand-Prix Multithreads - Document Architecture
 
 ## Class Diagram (UML)
-![Class diagram](UMLGrandPrix.png)
+![Class diagram](./UMLGrandPrix.png)
 
 ## Thread Chart Diagram
-![Thread chart](ThreadChartCars.png)
+![Thread chart](./ThreadChartCars.png)
 
 ## Flow Chart Diagram 
-![Flow chart](FlowChartGrandPrix.png)
+![Flow chart](./FlowChartGrandPrix.png)
 
 ### Team:
 **Kevin Contreras - A01635597**
