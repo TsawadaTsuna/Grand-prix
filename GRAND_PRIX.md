@@ -69,6 +69,6 @@ make clean
 - `int` finish - The condition for the car to finish running
 - `*int` places - The the final places the cars has
 
-### Explication
+### Explanation
 
-Video[link](yt)
+Video [Explanation](link va aqui)
