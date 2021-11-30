@@ -1,5 +1,5 @@
 # Grand-Prix Multithreads - Using OpenMP with C
-### Team members
+### Members
 
 
 Kevin Contreras - A01635597
@@ -7,12 +7,6 @@ Kevin Contreras - A01635597
 Luis Bodart - A01635000
 
 Michel Lujano - A01636172
-
-***
-
-### Professor
-
-Obed Nehemías Muñóz
 
 ***
 
