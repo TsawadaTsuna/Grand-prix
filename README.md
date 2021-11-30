@@ -1,6 +1,6 @@
 # Grand-Prix Multithreads - Using OpenMP with C
-### Members
 
+## Members
 
 Kevin Contreras - A01635597
 
@@ -10,13 +10,13 @@ Michel Lujano - A01636172
 
 ***
 
-### Description
+## Description
 
-**A final project** for the class **Advance Programming** - **Period: Ago-Dec 2021**
+**A final project** for the class **Advance Programming** - **Period: Aug-Dec 2021**
 
 ![Grand-Prix animation](./grandprix.gif)
 
-In this project is implemented by the API OpenMP using C which is able to run multithreads which has available upon to the machine running the method **omp_get_max_threads()** for the maximum value for cars where our output is visible in a CLI.
+This project implementes the API OpenMP using C which is able to run multithreads available upon to the machine running the method **omp_get_max_threads()** for the maximum value for cars where our output is visible in a CLI.
 
 ***
 
@@ -27,11 +27,8 @@ Documentation: [GRAND_PRIX.md](./GRAND_PRIX.md)
 ***
 
 ### More files, resources and others
- 	
+  
 * Architecture document: [ARCHITECTURE.md](./ARCHITECTURE.md)
 * Compilation, run and build: `Makefile`
 * Documentation: [GRAND_PRIX.md](./GRAND_PRIX.md)
 * Video: [YouTube](#)
-
-
-
