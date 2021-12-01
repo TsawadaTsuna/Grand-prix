@@ -31,4 +31,4 @@ Documentation: [GRAND_PRIX.md](./GRAND_PRIX.md)
 * Architecture document: [ARCHITECTURE.md](./ARCHITECTURE.md)
 * Compilation, run and build: `Makefile`
 * Documentation: [GRAND_PRIX.md](./GRAND_PRIX.md)
-* Video: [YouTube](#)
+* Video: [YouTube](https://youtu.be/1ho_WDurcfo)

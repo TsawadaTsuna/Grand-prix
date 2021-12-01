@@ -71,4 +71,4 @@ make clean
 
 ### Explanation
 
-Video [Explanation](link va aqui)
+Video [Explanation](https://youtu.be/1ho_WDurcfo)
